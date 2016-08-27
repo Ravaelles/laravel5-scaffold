@@ -12,22 +12,23 @@ Scaffold - {{ $modelName }}
     </h1>
 </div>
 
-@foreach ($objects as $object)
 <div class="row">
     <div class="col-md-12">
         <table class="table table-condensed table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    @include('laravel5-scaffold::partials.list-fields')
 
-                    <th class="text-right">OPTIONS</th>
+                    <th class="text-right">ACTIONS</th>
                 </tr>
             </thead>
 
             <tbody>
+                @foreach ($objects as $object)
                 <tr>
-                    <td>57c17ee3bffebc20048b4567</td>
+                    @include('laravel5-scaffold::partials.list-object')
 
+                    <!-- ACTIONS -->
                     <td class="text-right">
 
                         <a class="btn btn-xs btn-primary" 
@@ -52,13 +53,11 @@ Scaffold - {{ $modelName }}
                         </form>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
-
-
     </div>
 </div>
-@endforeach
 
 {{ $objects->links() }}
 @endsection

@@ -5,7 +5,7 @@
 
 @section('header')
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-plus"></i> {{ $modelName }}s / Create </h1>
+    <h1><i class="glyphicon glyphicon-plus"></i> Create {{ $modelName }} </h1>
 </div>
 @endsection
 
@@ -17,6 +17,8 @@
         <form action="{{ route('laravel5-scaffold.store') }}?model={{ $modelName }}" method="POST">
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+            @include('laravel5-scaffold::partials.object')
 
             <div class="well well-sm">
                 <button type="submit" class="btn btn-primary">Create</button>

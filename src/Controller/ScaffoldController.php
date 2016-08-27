@@ -16,10 +16,31 @@ class ScaffoldController extends Controller {
      */
     public function index(Request $request) {
         $model = $this->getModel($request);
-        $objects = $model::orderBy($model->getPrimaryKey(), 'desc')->paginate(10);
+        if ($model !== null) {
+            return $this->listObjects($request, $model);
+        } else {
+            return $this->dashboard($request);
+        }
+    }
 
-        return $this->view('index', [
+    private function dashboard($request) {
+        $rawModels = glob(app_path("*.php"));
+        $models = [];
+        $appPath = app_path("");
+        foreach ($rawModels as $rawFile) {
+            $models[$rawFile] = substr(str_replace([$appPath, ".php"], "", $rawFile), 1);
+        }
+
+        return $this->view('dashboard.dashboard', compact('models'));
+    }
+
+    private function listObjects($request, $model) {
+        $objects = $model::orderBy($model->getPrimaryKey(), 'desc')->paginate(10);
+        $fields = $this->getFieldsSchemaFromModel($model);
+
+        return $this->view('actions.index', [
                 'objects' => $objects,
+                'fields' => $fields,
                 'modelName' => $this->getModelName($request)
         ]);
     }
@@ -30,9 +51,13 @@ class ScaffoldController extends Controller {
      * @return Response
      */
     public function create(Request $request) {
-        return $this->view('create', [
-                'model' => $this->getModel($request),
+        $model = $this->getModel($request);
+        $fields = $this->getFieldsSchemaFromModel($model);
+
+        return $this->view('actions.create', [
+                'model' => $model,
                 'modelName' => $this->getModelName($request),
+                'fields' => $fields,
         ]);
     }
 
@@ -48,7 +73,9 @@ class ScaffoldController extends Controller {
 
         $object->save();
 
-        return redirect()->route('laravel5-scaffold.index')->with('message', 'Item created successfully.');
+        $modelName = $this->getModelName($request);
+        flash('Item added!', 'success');
+        return redirect()->route('laravel5-scaffold.index', ['model' => $modelName]);
     }
 
     /**
@@ -75,7 +102,7 @@ class ScaffoldController extends Controller {
         $object = $modelName::findOrFail($id);
 
         $modelName = $this->getModelName($request);
-        return $this->view('edit', compact('object', 'modelName'));
+        return $this->view('actions.edit', compact('object', 'modelName'));
     }
 
     /**
@@ -91,7 +118,8 @@ class ScaffoldController extends Controller {
 
         $object->save();
 
-        return redirect()->route('index')->with('message', 'Item updated successfully.');
+        flash('Item updated successfully.', 'info');
+        return redirect()->route('laravel5-scaffold.index', ['model' => $modelName]);
     }
 
     /**
@@ -105,7 +133,9 @@ class ScaffoldController extends Controller {
         $object = $modelName::findOrFail($id);
         $object->delete();
 
-        return redirect()->route('index')->with('message', 'Item deleted successfully.');
+        $modelName = $this->getModelName($request);
+        flash('Item deleted.', 'danger');
+        return redirect()->route('laravel5-scaffold.index', ['model' => $modelName]);
     }
 
     // =========================================================================
@@ -116,13 +146,27 @@ class ScaffoldController extends Controller {
 
     private function getModel($request) {
         $modelName = $request->get("model");
-        $class = $modelName;
-        $model = app("App\\{$modelName}");
-        return $model;
+        if (strlen($modelName)) {
+            $model = app("App\\{$modelName}");
+            return $model;
+        } else {
+            return null;
+        }
     }
 
     private function getModelName($request, $prefixWithApp = false) {
-        return ($prefixWithApp ? "App\\" : "") . $request->get("model");
+        $model = $request->get("model");
+        if (strlen($model)) {
+            return ($prefixWithApp ? "App\\" : "") . $model;
+        } else {
+            return null;
+        }
+    }
+
+    private function getFieldsSchemaFromModel($model) {
+        $class = get_class($model);
+        $fieldsSchema = $class::$scaffold;
+        return $fieldsSchema;
     }
 
 }
