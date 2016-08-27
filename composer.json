@@ -1,5 +1,5 @@
 {
-    "name": "Ravaelles/laravel5-scaffold",
+    "name": "ravaelles/laravel5-scaffold",
     "description": "Laravel 5 scaffold that provides easy MongoDB (schemaless) support.",
     "keywords": ["laravel", "generators", "scaffold", "laravel5", "mongodb"],
     "license": "MIT",
