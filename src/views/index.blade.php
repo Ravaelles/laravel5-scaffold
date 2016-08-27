@@ -1,14 +1,14 @@
 @extends('laravel5-scaffold::layout.rscaffold')
 
 @section('htmlheader_title')
-Scaffold - SkillsTemplates
+Scaffold - {{ $modelName }}
 @endsection
 
-@section('main-content')
+@section('content')
 <div class="page-header clearfix">
     <h1>
-        <i class="glyphicon glyphicon-align-justify"></i> SkillsTemplates
-        <a class="btn btn-success pull-right" href="/skills_templates/create"><i class="glyphicon glyphicon-plus"></i> Create</a>
+        <i class="glyphicon glyphicon-align-justify"></i> {{ $modelName }}s
+        <a class="btn btn-success pull-right" href="{{ url()->route('laravel5-scaffold.create') }}?model={{ $modelName }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
     </h1>
 </div>
 
@@ -31,22 +31,21 @@ Scaffold - SkillsTemplates
                     <td class="text-right">
 
                         <a class="btn btn-xs btn-primary" 
-                           href="{{ url()->route('scaffold.view', ['object' => $object->getId())]) }}">
+                           href="{{ url()->route('laravel5-scaffold.show', ['object' => $object->getId()]) }}?model={{ $modelName }}">
                             <i class="glyphicon glyphicon-eye-open"></i> View
                         </a>
 
                         <a class="btn btn-xs btn-warning" 
-                           href="{{ url()->route('scaffold.edit', ['object' => $object->getId())]) }}">
+                           href="{{ url()->route('laravel5-scaffold.edit', ['object' => $object->getId()]) }}?model={{ $modelName }}">
                             <i class="glyphicon glyphicon-edit"></i> Edit
                         </a>
 
-                        <form action="{{ url()->route('scaffold.delete', ['object' => $object->getId())]) }}" method="POST" 
-                              style="display: inline;" onsubmit="if (confirm('Delete? Are you sure?')) {
+                        <form action="{{ url()->route('laravel5-scaffold.destroy', ['object' => $object->getId()]) }}?model={{ $modelName }}" 
+                              method="POST" style="display: inline;" onsubmit="if (confirm('Delete? Are you sure?')) {
                                     return true
                                 } else {
                                     return false
-                                }
-                                ;">
+                                };">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</button>

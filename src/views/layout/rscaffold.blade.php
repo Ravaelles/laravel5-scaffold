@@ -9,7 +9,7 @@
         <meta name="author" content="">
         <link rel="icon" href="favicon.ico">
 
-        <title>Laravel5 Scaffold</title>
+        <title>Starter Template</title>
 
         <!-- Bootstrap core CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -17,11 +17,13 @@
         <!-- Custom styles for this template -->
         <!-- <link href="starter-template.css" rel="stylesheet"> -->
 
+
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        @yield('css')
     </head>
 
     <body>
@@ -35,7 +37,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Project</a>
+                    <a class="navbar-brand" href="#">Project name</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
@@ -48,13 +50,8 @@
         </nav>
 
         <div class="container">
-
-            @include('laravel5-scaffold::partials.error')
-
-            @yield('main-content', '')
-
-            @include('laravel5-scaffold::partials.error')
-
+            @yield('header')
+            @yield('content')
         </div><!-- /.container -->
 
         <!-- Bootstrap core JavaScript
@@ -64,5 +61,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+        @yield('scripts')
     </body>
 </html>

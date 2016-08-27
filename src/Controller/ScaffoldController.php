@@ -4,7 +4,6 @@ namespace Ravaelles\Laravel5Scaffold;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\SkillsTemplate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -15,23 +14,13 @@ class ScaffoldController extends Controller {
      *
      * @return Response
      */
-    public function index($model) {
-//        $skills_templates = SkillsTemplate::orderBy('id', 'desc')->paginate(10);
-//
-//        return view('skills_templates.index', compact('skills_templates'));
-
-        $class = "App\\" . $model;
-        $model = app("App\\{$model}");
-
+    public function index(Request $request) {
+        $model = $this->getModel($request);
         $objects = $model::orderBy($model->getPrimaryKey(), 'desc')->paginate(10);
 
-//        foreach ($objects as $object) {
-//            var_dump($object);
-//        }
-//        exit;
-
-        return View::make('laravel5-scaffold::index', [
+        return $this->view('index', [
                 'objects' => $objects,
+                'modelName' => $this->getModelName($request)
         ]);
     }
 
@@ -40,8 +29,11 @@ class ScaffoldController extends Controller {
      *
      * @return Response
      */
-    public function create() {
-        return view('skills_templates.create');
+    public function create(Request $request) {
+        return $this->view('create', [
+                'model' => $this->getModel($request),
+                'modelName' => $this->getModelName($request),
+        ]);
     }
 
     /**
@@ -51,13 +43,12 @@ class ScaffoldController extends Controller {
      * @return Response
      */
     public function store(Request $request) {
-        $skills_template = new SkillsTemplate();
+        $modelName = $this->getModelName($request, true);
+        $object = new $modelName();
 
+        $object->save();
 
-
-        $skills_template->save();
-
-        return redirect()->route('skills_templates.index')->with('message', 'Item created successfully.');
+        return redirect()->route('laravel5-scaffold.index')->with('message', 'Item created successfully.');
     }
 
     /**
@@ -66,10 +57,11 @@ class ScaffoldController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function show($id) {
-        $skills_template = SkillsTemplate::findOrFail($id);
+    public function show(Request $request, $id) {
+        $modelName = $this->getModelName($request, true);
+        $object = $modelName::findOrFail($id);
 
-        return view('skills_templates.show', compact('skills_template'));
+        return $this->view('show', compact('object'));
     }
 
     /**
@@ -78,10 +70,12 @@ class ScaffoldController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function edit($id) {
-        $skills_template = SkillsTemplate::findOrFail($id);
+    public function edit(Request $request, $id) {
+        $modelName = $this->getModelName($request, true);
+        $object = $modelName::findOrFail($id);
 
-        return view('skills_templates.edit', compact('skills_template'));
+        $modelName = $this->getModelName($request);
+        return $this->view('edit', compact('object', 'modelName'));
     }
 
     /**
@@ -92,13 +86,12 @@ class ScaffoldController extends Controller {
      * @return Response
      */
     public function update(Request $request, $id) {
-        $skills_template = SkillsTemplate::findOrFail($id);
+        $modelName = $this->getModelName($request, true);
+        $object = $modelName::findOrFail($id);
 
+        $object->save();
 
-
-        $skills_template->save();
-
-        return redirect()->route('skills_templates.index')->with('message', 'Item updated successfully.');
+        return redirect()->route('index')->with('message', 'Item updated successfully.');
     }
 
     /**
@@ -107,11 +100,29 @@ class ScaffoldController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id) {
-        $skills_template = SkillsTemplate::findOrFail($id);
-        $skills_template->delete();
+    public function destroy(Request $request, $id) {
+        $modelName = $this->getModelName($request, true);
+        $object = $modelName::findOrFail($id);
+        $object->delete();
 
-        return redirect()->route('skills_templates.index')->with('message', 'Item deleted successfully.');
+        return redirect()->route('index')->with('message', 'Item deleted successfully.');
+    }
+
+    // =========================================================================
+
+    private function view($viewName, $params = []) {
+        return View::make('laravel5-scaffold::' . $viewName, $params);
+    }
+
+    private function getModel($request) {
+        $modelName = $request->get("model");
+        $class = $modelName;
+        $model = app("App\\{$modelName}");
+        return $model;
+    }
+
+    private function getModelName($request, $prefixWithApp = false) {
+        return ($prefixWithApp ? "App\\" : "") . $request->get("model");
     }
 
 }
