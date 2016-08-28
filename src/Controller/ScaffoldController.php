@@ -35,7 +35,26 @@ class ScaffoldController extends Controller {
     }
 
     private function listObjects($request, $model) {
-        $objects = $model::orderBy($model->getPrimaryKey(), 'desc')->paginate(10);
+        $modelName = $this->getModelName($request, true);
+        if (isset($modelName::$scaffoldSort)) {
+            $sort = $modelName::$scaffoldSort;
+        } else {
+            $sort = [$model->getPrimaryKey() => 'desc'];
+        }
+
+        // === Get objects ======================================================================
+
+        // Sort
+        $objects = $model;
+        foreach ($sort as $key => $value) {
+            $objects = $objects->orderBy($key, $value);
+        }
+
+        // Paginate
+        $objects = $objects->paginate(10);
+
+        // =========================================================================
+
         $fields = $this->getFieldsSchemaFromModel($model);
 
         return $this->view('actions.index', [
@@ -183,7 +202,7 @@ class ScaffoldController extends Controller {
 
     private function assignAllValidFieldsToObject($object, $request) {
         foreach ($request->all() as $name => $value) {
-            if ($name[0] !== "_") {
+            if (!in_array($name, ['_id', '_created', '_updated'])) {
                 $object->$name = $value;
             }
         }

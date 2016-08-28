@@ -13,7 +13,7 @@
 
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="btn-group pull-right" role="group" aria-label="...">
+        <div class="object-actions btn-group pull-right" role="group" aria-label="...">
             <a class="btn btn-warning btn-group" role="group" href="{{ route('laravel5-scaffold.edit', $object->getId()) }}?model={{ $modelName }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
             <button type="submit" class="btn btn-danger">Delete <i class="glyphicon glyphicon-trash"></i></button>
         </div>
@@ -27,7 +27,7 @@
     <div class="col-md-12">
         <form action="#">
 
-            @include('laravel5-scaffold::partials.object', ['mode' => 'show'])
+            @include('laravel5-scaffold::partials.object', ['mode' => 'show', 'disabled' => true])
 
         </form>
 

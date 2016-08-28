@@ -31,7 +31,7 @@
 </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
 <script>
 $('.date-picker').datepicker({
@@ -43,4 +43,4 @@ $('.date-picker').datepicker({
         $('.form-control').get(0).focus();
     });
 </script>
-@endsection
+@endpush

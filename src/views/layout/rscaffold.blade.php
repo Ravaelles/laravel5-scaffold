@@ -17,6 +17,10 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+        <script>
+            window.initQueue = [];
+        </script> 
+
         <!-- Custom styles for this template -->
         <!-- <link href="starter-template.css" rel="stylesheet"> -->
 
@@ -77,6 +81,6 @@
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
-        @yield('scripts')
+        @stack('scripts')
     </body>
 </html>

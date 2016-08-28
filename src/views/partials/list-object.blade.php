@@ -11,15 +11,27 @@
 <td>
     <?php
     $fieldValue = $object->$fieldName;
-    if (isset($fieldArray['select'])) {
-        foreach ($fieldArray['select'] as $value => $option) {
-            if ($fieldValue == $value) {
-                $fieldValue = $option;
-                break;
+
+    // If is not special case - display custom view for this field
+    if (!isset($fieldArray['view'])) {
+
+        // === SELECT ======================================================================
+        if (isset($fieldArray['select'])) {
+            foreach ($fieldArray['select'] as $value => $option) {
+                if ($fieldValue == $value) {
+                    $fieldValue = $option;
+                    break;
+                }
             }
         }
+        ?>
+        {!! !empty($fieldValue) ? $fieldValue : "<font color='#ccc'>null</font>" !!}
+        <?php
+    } else {
+        ?>
+        @include($fieldArray['view'])
+        <?php
     }
     ?>
-    {!! !empty($fieldValue) ? $fieldValue : "<font color='#ccc'>null</font>" !!}
 </td>
 @endforeach

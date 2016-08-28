@@ -16,8 +16,14 @@
     }
 
     .form-group {
+        padding-top: 15px;
         padding-left: 10px;
         padding-right: 10px;
+    }
+
+    label {
+        opacity: 0.6;
+        font-size: 105%;
     }
 
     input, select {
@@ -44,5 +50,33 @@
     
     .table-striped>tbody>tr:nth-of-type(even) {
         background-color: #dbd6fa;
+    }
+
+    .table-index tr,
+    .table-index th,
+    .table-index td {
+        vertical-align: middle !important; 
+        text-align: center;
+    }
+
+    .table-index tr>td:last-child {
+        max-width: 60px;
+        width: 60px;
+    }
+
+    .table-index tr>td:last-child .btn {
+        width: 100%;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        text-align: left;
+    }
+
+    .object-actions {
+        margin-top: -8px;
+    }
+    
+    form > table {
+        margin-top: 5px;
+        box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
     }
 </style>
