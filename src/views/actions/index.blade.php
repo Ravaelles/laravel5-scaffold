@@ -14,7 +14,7 @@ Scaffold - {{ $modelName }}
 
 <div class="row">
     <div class="col-md-12">
-        <table class="table table-condensed table-striped">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     @include('laravel5-scaffold::partials.list-fields')
@@ -26,7 +26,7 @@ Scaffold - {{ $modelName }}
             <tbody>
                 @foreach ($objects as $object)
                 <tr>
-                    @include('laravel5-scaffold::partials.list-object')
+                    @include('laravel5-scaffold::partials.list-object', ['mode' => 'index'])
 
                     <!-- ACTIONS -->
                     <td class="text-right">

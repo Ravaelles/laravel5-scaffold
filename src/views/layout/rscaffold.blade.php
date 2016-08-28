@@ -60,6 +60,8 @@
             </div>
             @endif
 
+            @include('laravel5-scaffold::partials.style')
+
             @yield('header')
             @yield('content')
         </div><!-- /.container -->

@@ -1,4 +1,5 @@
-@extends('layout')
+@extends('laravel5-scaffold::layout.rscaffold')
+
 @section('css')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css" rel="stylesheet">
 @endsection
@@ -10,7 +11,7 @@
 @endsection
 
 @section('content')
-@include('error')
+@include('laravel5-scaffold::partials.error')
 
 <div class="row">
     <div class="col-md-12">
@@ -18,7 +19,7 @@
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            @include('laravel5-scaffold::partials.object')
+            @include('laravel5-scaffold::partials.object', ['mode' => 'create'])
 
             <div class="well well-sm">
                 <button type="submit" class="btn btn-primary">Create</button>
@@ -35,5 +36,11 @@
 <script>
 $('.date-picker').datepicker({
 });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.form-control').get(0).focus();
+    });
 </script>
 @endsection

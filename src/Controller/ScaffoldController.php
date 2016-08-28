@@ -55,9 +55,9 @@ class ScaffoldController extends Controller {
         $fields = $this->getFieldsSchemaFromModel($model);
 
         return $this->view('actions.create', [
+                'fields' => $fields,
                 'model' => $model,
                 'modelName' => $this->getModelName($request),
-                'fields' => $fields,
         ]);
     }
 
@@ -71,11 +71,11 @@ class ScaffoldController extends Controller {
         $modelName = $this->getModelName($request, true);
         $object = new $modelName();
 
+        $this->assignAllValidFieldsToObject($object, $request);
         $object->save();
 
-        $modelName = $this->getModelName($request);
         flash('Item added!', 'success');
-        return redirect()->route('laravel5-scaffold.index', ['model' => $modelName]);
+        return redirect()->route('laravel5-scaffold.index', ['model' => $this->getModelName($request)]);
     }
 
     /**
@@ -85,10 +85,16 @@ class ScaffoldController extends Controller {
      * @return Response
      */
     public function show(Request $request, $id) {
+        $model = $this->getModel($request);
         $modelName = $this->getModelName($request, true);
         $object = $modelName::findOrFail($id);
+        $fields = $this->getFieldsSchemaFromModel($model);
 
-        return $this->view('show', compact('object'));
+        return $this->view('actions.show', [
+                'fields' => $fields,
+                'object' => $object,
+                'modelName' => $this->getModelName($request)
+        ]);
     }
 
     /**
@@ -98,11 +104,16 @@ class ScaffoldController extends Controller {
      * @return Response
      */
     public function edit(Request $request, $id) {
+        $model = $this->getModel($request);
         $modelName = $this->getModelName($request, true);
         $object = $modelName::findOrFail($id);
+        $fields = $this->getFieldsSchemaFromModel($model);
 
-        $modelName = $this->getModelName($request);
-        return $this->view('actions.edit', compact('object', 'modelName'));
+        return $this->view('actions.edit', [
+                'fields' => $fields,
+                'object' => $object,
+                'modelName' => $this->getModelName($request)
+        ]);
     }
 
     /**
@@ -116,10 +127,11 @@ class ScaffoldController extends Controller {
         $modelName = $this->getModelName($request, true);
         $object = $modelName::findOrFail($id);
 
+        $this->assignAllValidFieldsToObject($object, $request);
         $object->save();
 
         flash('Item updated successfully.', 'info');
-        return redirect()->route('laravel5-scaffold.index', ['model' => $modelName]);
+        return redirect()->route('laravel5-scaffold.index', ['model' => $this->getModelName($request)]);
     }
 
     /**
@@ -167,6 +179,14 @@ class ScaffoldController extends Controller {
         $class = get_class($model);
         $fieldsSchema = $class::$scaffold;
         return $fieldsSchema;
+    }
+
+    private function assignAllValidFieldsToObject($object, $request) {
+        foreach ($request->all() as $name => $value) {
+            if ($name[0] !== "_") {
+                $object->$name = $value;
+            }
+        }
     }
 
 }

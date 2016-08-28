@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('laravel5-scaffold::layout.rscaffold')
 
 @section('header')
 <div class="page-header">
@@ -25,12 +25,9 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-
         <form action="#">
-            <div class="form-group">
-                <label for="nome">ID</label>
-                <p class="form-control-static"></p>
-            </div>
+
+            @include('laravel5-scaffold::partials.object', ['mode' => 'show'])
 
         </form>
 
@@ -38,5 +35,4 @@
 
     </div>
 </div>
-
 @endsection
