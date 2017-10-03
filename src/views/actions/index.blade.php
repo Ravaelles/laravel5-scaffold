@@ -1,4 +1,4 @@
-@extends('laravel5-scaffold::layout.rscaffold')
+@extends('rscaffold::layout.rscaffold')
 
 @section('htmlheader_title')
 Scaffold - {{ $modelName }}
@@ -8,7 +8,7 @@ Scaffold - {{ $modelName }}
 <div class="page-header clearfix">
     <h1>
         <i class="glyphicon glyphicon-align-justify"></i> {{ $modelName }}s
-        <a class="btn btn-success pull-right" href="{{ url()->route('laravel5-scaffold.create') }}?model={{ $modelName }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
+        <a class="btn btn-success pull-right" href="{{ url()->route('rscaffold.create') }}?model={{ $modelName }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
     </h1>
 </div>
 
@@ -17,7 +17,7 @@ Scaffold - {{ $modelName }}
         <table class="table table-striped table-index">
             <thead>
                 <tr>
-                    @include('laravel5-scaffold::partials.list-fields')
+                    @include('rscaffold::partials.list-fields')
 
                     <th class="text-right">ACTIONS</th>
                 </tr>
@@ -26,22 +26,22 @@ Scaffold - {{ $modelName }}
             <tbody>
                 @foreach ($objects as $object)
                 <tr>
-                    @include('laravel5-scaffold::partials.list-object', ['mode' => 'index', 'disabled' => true])
+                    @include('rscaffold::partials.list-object', ['mode' => 'index', 'disabled' => true])
 
                     <!-- ACTIONS -->
                     <td class="text-right">
 
                         <a class="btn btn-xs btn-primary" 
-                           href="{{ url()->route('laravel5-scaffold.show', ['object' => $object->getId()]) }}?model={{ $modelName }}">
+                           href="{{ url()->route('rscaffold.show', ['object' => $object->getId()]) }}?model={{ $modelName }}">
                             <i class="glyphicon glyphicon-eye-open"></i> View
                         </a>
 
                         <a class="btn btn-xs btn-warning" 
-                           href="{{ url()->route('laravel5-scaffold.edit', ['object' => $object->getId()]) }}?model={{ $modelName }}">
+                           href="{{ url()->route('rscaffold.edit', ['object' => $object->getId()]) }}?model={{ $modelName }}">
                             <i class="glyphicon glyphicon-edit"></i> Edit
                         </a>
 
-                        <form action="{{ url()->route('laravel5-scaffold.destroy', ['object' => $object->getId()]) }}?model={{ $modelName }}" 
+                        <form action="{{ url()->route('rscaffold.destroy', ['object' => $object->getId()]) }}?model={{ $modelName }}" 
                               method="POST" style="display: inline;" onsubmit="if (confirm('Delete? Are you sure?')) {
                                     return true
                                 } else {

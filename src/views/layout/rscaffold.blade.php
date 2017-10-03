@@ -44,7 +44,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        {!! config('laravel5-scaffold.project-name') !!}
+                        {!! config('rscaffold.project-name') !!}
                     </a>
                 </div>
                 <!--                <div id="navbar" class="collapse navbar-collapse">
@@ -66,7 +66,7 @@
             </div>
             @endif
 
-            @include('laravel5-scaffold::partials.style')
+            @include('rscaffold::partials.style')
 
             @yield('header')
             @yield('content')

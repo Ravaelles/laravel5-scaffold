@@ -15,7 +15,7 @@ class GeneratorsServiceProvider extends ServiceProvider {
 //        $this->commands([Crud::class]);
 
 //        dd(__DIR__ . '/views');
-        $this->loadViewsFrom(__DIR__ . '/views', 'laravel5-scaffold');
+        $this->loadViewsFrom(__DIR__ . '/views', 'rscaffold');
 //        $this->loadViewsFrom(__DIR__ . '/../../views', 'laravel-log-viewer');
 
         $this->publishes([

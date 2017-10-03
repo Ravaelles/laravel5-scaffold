@@ -1,4 +1,4 @@
-@extends('laravel5-scaffold::layout.rscaffold')
+@extends('rscaffold::layout.rscaffold')
 
 @section('htmlheader_title')
 Choose model to scaffold
@@ -8,7 +8,7 @@ Choose model to scaffold
 <div class="page-header clearfix">
     <h1>
         <i class="glyphicon glyphicon-align-justify"></i> Showing existing models
-        <a class="btn btn-success pull-right" href="{{ url()->route('laravel5-scaffold.generate-model') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
+        <a class="btn btn-success pull-right" href="{{ url()->route('rscaffold.generate-model') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
     </h1>
 </div>
 
@@ -26,7 +26,7 @@ Choose model to scaffold
                 <tr>
                     <td>
                         <a class="btn btn-primary btn-app-blue"
-                           href="{{ route('laravel5-scaffold.index') }}?model={{ $modelName }}"
+                           href="{{ route('rscaffold.index') }}?model={{ $modelName }}"
                            >{{ $modelName }}</a>
                     </td>
                 </tr>

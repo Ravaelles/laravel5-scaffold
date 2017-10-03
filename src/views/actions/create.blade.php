@@ -1,4 +1,4 @@
-@extends('laravel5-scaffold::layout.rscaffold')
+@extends('rscaffold::layout.rscaffold')
 
 @section('css')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css" rel="stylesheet">
@@ -11,19 +11,19 @@
 @endsection
 
 @section('content')
-@include('laravel5-scaffold::partials.error')
+@include('rscaffold::partials.error')
 
 <div class="row">
     <div class="col-md-12">
-        <form action="{{ route('laravel5-scaffold.store') }}?model={{ $modelName }}" method="POST">
+        <form action="{{ route('rscaffold.store') }}?model={{ $modelName }}" method="POST">
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            @include('laravel5-scaffold::partials.object', ['mode' => 'create'])
+            @include('rscaffold::partials.object', ['mode' => 'create'])
 
             <div class="well well-sm">
                 <button type="submit" class="btn btn-primary">Create</button>
-                <a class="btn btn-link pull-right" href="{{ route('laravel5-scaffold.index') }}?model={{ $modelName }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
+                <a class="btn btn-link pull-right" href="{{ route('rscaffold.index') }}?model={{ $modelName }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
             </div>
 
         </form>

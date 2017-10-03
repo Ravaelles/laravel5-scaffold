@@ -94,7 +94,7 @@ class RScaffoldController extends Controller {
         $object->save();
 
         flash("$modelName added!", 'success');
-        return redirect()->route('laravel5-scaffold.index', ['model' => $this->getModelName($request)]);
+        return redirect()->route('rscaffold.index', ['model' => $this->getModelName($request)]);
     }
 
     /**
@@ -150,7 +150,7 @@ class RScaffoldController extends Controller {
         $object->save();
 
         flash("$modelName updated successfully.", 'info');
-        return redirect()->route('laravel5-scaffold.index', ['model' => $this->getModelName($request)]);
+        return redirect()->route('rscaffold.index', ['model' => $this->getModelName($request)]);
     }
 
     /**
@@ -166,13 +166,13 @@ class RScaffoldController extends Controller {
 
         $modelName = $this->getModelName($request);
         flash("$modelName deleted.", 'danger');
-        return redirect()->route('laravel5-scaffold.index', ['model' => $modelName]);
+        return redirect()->route('rscaffold.index', ['model' => $modelName]);
     }
 
     // =========================================================================
 
     private function view($viewName, $params = []) {
-        return View::make('laravel5-scaffold::' . $viewName, $params);
+        return View::make('rscaffold::' . $viewName, $params);
     }
 
     private function getModel($request) {

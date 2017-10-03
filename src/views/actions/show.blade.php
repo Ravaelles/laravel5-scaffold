@@ -1,9 +1,9 @@
-@extends('laravel5-scaffold::layout.rscaffold')
+@extends('rscaffold::layout.rscaffold')
 
 @section('header')
 <div class="page-header">
     <h1>Showing {{ $modelName }}</h1>
-    <form action="{{ route('laravel5-scaffold.destroy', $object->getId()) }}?model={{ $modelName }}" 
+    <form action="{{ route('rscaffold.destroy', $object->getId()) }}?model={{ $modelName }}" 
           method="POST" style="display: inline;" onsubmit="if (confirm('Delete? Are you sure?')) {
                 return true
             } else {
@@ -14,7 +14,7 @@
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="object-actions btn-group pull-right" role="group" aria-label="...">
-            <a class="btn btn-warning btn-group" role="group" href="{{ route('laravel5-scaffold.edit', $object->getId()) }}?model={{ $modelName }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+            <a class="btn btn-warning btn-group" role="group" href="{{ route('rscaffold.edit', $object->getId()) }}?model={{ $modelName }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
             <button type="submit" class="btn btn-danger">Delete <i class="glyphicon glyphicon-trash"></i></button>
         </div>
 
@@ -27,11 +27,11 @@
     <div class="col-md-12">
         <form action="#">
 
-            @include('laravel5-scaffold::partials.object', ['mode' => 'show', 'disabled' => true])
+            @include('rscaffold::partials.object', ['mode' => 'show', 'disabled' => true])
 
         </form>
 
-        <a class="btn btn-link" href="{{ route('laravel5-scaffold.index') }}?model={{ $modelName }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
+        <a class="btn btn-link" href="{{ route('rscaffold.index') }}?model={{ $modelName }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
 
     </div>
 </div>
