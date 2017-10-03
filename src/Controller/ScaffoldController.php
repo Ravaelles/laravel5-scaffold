@@ -1,6 +1,6 @@
 <?php
 
-namespace Ravaelles\Laravel5Scaffold;
+namespace Ravaelles\RScaffold;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
