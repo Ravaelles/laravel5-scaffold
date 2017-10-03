@@ -3,7 +3,6 @@
     "description": "Laravel 5 scaffold that provides easy MongoDB (schemaless) support.",
     "keywords": ["laravel", "generators", "scaffold", "laravel5", "mongodb"],
     "license": "MIT",
-    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Rafal Poniatowski",
@@ -16,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Ravaelles\\Scaffold\\": "src/"
+            "Ravaelles\\RScaffold\\": "src/"
         }
     }
 }

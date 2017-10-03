@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class ScaffoldController extends Controller {
+class RScaffoldController extends Controller {
 
     /**
      * Display a listing of the resource.
