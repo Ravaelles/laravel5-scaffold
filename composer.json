@@ -1,5 +1,5 @@
 {
-    "name": "ravaelles/laravel5-scaffold",
+    "name": "ravaelles/scaffold",
     "description": "Laravel 5 scaffold that provides easy MongoDB (schemaless) support.",
     "keywords": ["laravel", "generators", "scaffold", "laravel5", "mongodb"],
     "license": "MIT",
@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Ravaelles\\Laravel5Scaffold\\": "src/"
+            "Ravaelles\\Scaffold\\": "src/"
         }
     }
 }
