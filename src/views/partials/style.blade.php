@@ -7,6 +7,14 @@
         box-shadow: 10px 10px 15px rgba(0,0,0,0.2);
     }
 
+    h1 {
+        margin-top: 0;
+    }
+
+    h1 .glyphicon {
+        font-size: 80%;
+    }
+
     .btn {
         border: 1px solid rgba(0,0,0,0.2);
     }
@@ -45,11 +53,13 @@
     }
     
     .table-striped>tbody>tr:nth-of-type(odd) {
-        background-color: #cdecff;
+        /*background-color: #cdecff;*/
+        background-color: white;
     }
     
     .table-striped>tbody>tr:nth-of-type(even) {
-        background-color: #dbd6fa;
+        /*background-color: #dbd6fa;*/
+        background-color: rgba(0,0,0,0.04);
     }
 
     .table-index tr,

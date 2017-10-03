@@ -20,8 +20,8 @@
             foreach ($fieldArray['select'] as $value => $option) {
                 if ($fieldValue == $value) {
                     $fieldValue = $option;
-                    break;
-                }
+                break;
+            }
             }
         }
         ?>
@@ -29,7 +29,7 @@
         <?php
     } else {
         ?>
-        @include($fieldArray['view'])
+            @include($fieldArray['view'])
         <?php
     }
     ?>

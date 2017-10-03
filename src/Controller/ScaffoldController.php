@@ -93,7 +93,7 @@ class ScaffoldController extends Controller {
         $this->assignAllValidFieldsToObject($object, $request);
         $object->save();
 
-        flash('Item added!', 'success');
+        flash("$modelName added!", 'success');
         return redirect()->route('laravel5-scaffold.index', ['model' => $this->getModelName($request)]);
     }
 
@@ -149,7 +149,7 @@ class ScaffoldController extends Controller {
         $this->assignAllValidFieldsToObject($object, $request);
         $object->save();
 
-        flash('Item updated successfully.', 'info');
+        flash("$modelName updated successfully.", 'info');
         return redirect()->route('laravel5-scaffold.index', ['model' => $this->getModelName($request)]);
     }
 
@@ -165,7 +165,7 @@ class ScaffoldController extends Controller {
         $object->delete();
 
         $modelName = $this->getModelName($request);
-        flash('Item deleted.', 'danger');
+        flash("$modelName deleted.", 'danger');
         return redirect()->route('laravel5-scaffold.index', ['model' => $modelName]);
     }
 
@@ -202,7 +202,7 @@ class ScaffoldController extends Controller {
 
     private function assignAllValidFieldsToObject($object, $request) {
         foreach ($request->all() as $name => $value) {
-            if (!in_array($name, ['_id', '_created', '_updated'])) {
+            if (!in_array($name, ['_id', '_created', '_updated', '_token', '_method'])) {
                 $object->$name = $value;
             }
         }
